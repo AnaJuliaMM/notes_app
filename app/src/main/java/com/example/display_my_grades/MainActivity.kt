@@ -16,17 +16,12 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
         setContentView(R.layout.main_activity)
 
-
-
-        // Configure o botão flutuante para abrir o popup
-        val btnAddGrade = findViewById<FloatingActionButton>(R.id.botao_adicionar_nota)
-        btnAddGrade.setOnClickListener { view ->
+        val btnAddNote = findViewById<FloatingActionButton>(R.id.botao_adicionar_nota)
+        btnAddNote.setOnClickListener { view ->
             app(view)
         }
-
 
     }
 
@@ -37,31 +32,27 @@ class MainActivity : ComponentActivity() {
         val titleText = EditText(this)
         popUpTitle.setView(titleText)
 
-        popUpTitle.setPositiveButton("Ok") { dialog, _ ->
+        popUpTitle.setPositiveButton("Adicionar") { dialog, _ ->
 
             if (titleText.text.isEmpty()) {
                 Toast.makeText(this, "Melhor não adicionar notas vazias", Toast.LENGTH_SHORT).show()
             } else {
-                val gradeView =  TextView(this)
-                gradeView.text = titleText.text.toString()
-
-                // Configuração de layout para o novo TextView
+                val noteView =  TextView(this)
+                noteView.text = titleText.text.toString()
                 val params = LinearLayout.LayoutParams(
                     LinearLayout.LayoutParams.MATCH_PARENT,
                     LinearLayout.LayoutParams.WRAP_CONTENT
                 )
-                params.setMargins(0, 10, 0, 0) // Define margens para o TextView
-                gradeView.layoutParams = params
-                gradeView.setTextSize(TypedValue.COMPLEX_UNIT_SP, 17f)
-                gradeView.setBackgroundColor(ContextCompat.getColor(this, R.color.note_bg))
-                gradeView.setTextColor(ContextCompat.getColor(this, R.color.black))
-                gradeView.setPadding(15, 10, 10, 15 )
+                params.setMargins(0, 10, 0, 0)
+                noteView.layoutParams = params
+                noteView.setTextSize(TypedValue.COMPLEX_UNIT_SP, 17f)
+                noteView.setBackgroundColor(ContextCompat.getColor(this, R.color.note_bg))
+                noteView.setTextColor(ContextCompat.getColor(this, R.color.black))
+                noteView.setPadding(15, 10, 10, 15 )
 
-                val gradeListView = findViewById<LinearLayout>(R.id.lista_notas)
-                gradeListView.addView(gradeView)
+                val noteListView = findViewById<LinearLayout>(R.id.lista_notas)
+                noteListView.addView(noteView)
             }
-
-
 
         }
         popUpTitle.setNegativeButton("Cancelar") { dialog, _ ->
